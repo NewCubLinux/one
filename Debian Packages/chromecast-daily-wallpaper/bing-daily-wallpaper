@@ -1,0 +1,34 @@
+#!/bin/bash
+# bing-daily-wallpaper
+# Version 0.1
+# 
+# Simple command line tool which will grab a the Bing daily 
+# wallpaper using the Bing RSS feed.
+#
+# Depends: lynx, nitrogen
+# 
+# Created by RichJack, 2015 designed for Chromixium OS:
+# http://chromixium.org
+# 
+# Licence: GPL v3
+#
+# bing-daily-wallpaper is free software: you can redistribute it
+# and/or modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 2 of
+# the License, or (at your option) any later version.
+#
+# Chromecast-daily-wallpaper is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+# of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Chromecast-daily-wallpaper.  If not, see
+# <http://www.gnu.org/licenses/>.
+
+bing=$(lynx -source "http://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1&mkt=en-US" | awk -F ".jpg" '{print $1}' | awk -F "<url>" '{print $2}')
+bing="https://www.bing.com${bing}.jpg"
+
+wget -O /tmp/bingdailywallpaper.jpg "$bing"
+
+nitrogen --set-scaled --save "/tmp/bingdailywallpaper.jpg"
