@@ -1,0 +1,26 @@
+Package: cub-input
+Version: 0.3cub1
+Architecture: all
+Maintainer: Rich Jack <contact@cublinux.com>
+Installed-Size: 48
+Section: utils
+Priority: optional
+Homepage: https://github.com/CubLinux
+Depends: yad
+Description: Cub Input
+ Keyboard, mouse and touchpad settings.
+ .
+ A simple GTK GUI for setting the keyboard,
+ mouse and touchpad state by querying and
+ configuring settings via Xmodmap, Xset
+ and Synclient.
+ .
+ This tool does not require Gnome and stores
+ its settings as a script that can be set to
+ autostart as a user logs in eg in Openbox,
+ just add the path ~/.config/cub-input
+ to your autostart script.
+ .
+ This gets around the problems of similar
+ tools which store their settings in the
+ gnome database d/gconf.

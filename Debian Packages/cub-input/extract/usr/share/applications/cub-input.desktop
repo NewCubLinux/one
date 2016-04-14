@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=cub-input
+Name=Keyboard, mouse & touchpad settings
+Comment=Configure the keyboard, mouse, and touchpad
+Icon=input-mouse
+StartupWMClass=cub-input
+Categories=GTK;Settings;HardwareSettings;

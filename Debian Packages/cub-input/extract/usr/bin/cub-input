@@ -1,0 +1,241 @@
+#!/bin/bash
+
+# Simple gui using Synclient and Yad to set mouse and touchpad settings 
+# in Openbox and other non-gnome distros, specifically Cub Linux!
+
+# Version 0.3cub1
+# Licensed under GPLv3
+# RichJack <contact@cublinux.com> https://cublinux.com
+
+# Configuration file
+CONF="$HOME/.config/cub-input"
+
+####################################
+### GET ALL THE CURRENT SETTINGS ###
+####################################
+function getcurrent(){
+# Get keyboard settings:
+if [[ $(xset -q | grep 'auto repeat:' | awk '{print $3}') == "on" ]]; then
+	AUTOREP=TRUE
+else
+	AUTOREP=FALSE
+fi
+# Repeat delay is in milliseconds. Any delay longer than 1 sec is not worth having
+# autorepeat set to on, so divide by 10 to get a percent for scale dialog
+REPDEL=$(xset -q | grep 'auto repeat delay:' | awk '{print ($4/10)}')
+# Repeat rate is in characters per second. Keep max at 100 - it's very fast!
+REPRATE=$(xset -q | grep 'auto repeat delay:' | awk '{print $7}')
+
+# Get current mouse button mappings
+if [ -f $CONF ]; then
+   if [[ $(cat $CONF | grep "xmodmap -e" | awk '{print $5}') == "1" ]]; then
+	LEFTH=FALSE
+   else
+	LEFTH=TRUE
+   fi
+   if [[ $(cat $CONF | grep "xmodmap -e" | awk '{print $8}') == "4" ]]; then
+	NATSCROLL=FALSE
+   else
+	NATSCROLL=TRUE
+   fi
+else
+   LEFTH=FALSE
+   NATSCROLL=FALSE
+fi
+
+# Get touchpad settings:
+# Vertical and horizontal edge scrolling
+if [[ $(synclient -l | grep VertEdgeScroll  | awk -F' = ' '{print $2}') == "1" ]]; then
+	VES=TRUE
+else
+	VES=FALSE
+fi
+HES=$VES
+# Vertical and horizontal 2-finger scrolling
+if [[ $(synclient -l | grep VertTwoFingerScroll  | awk -F' = ' '{print $2}') == "1" ]]; then
+	V2FS=TRUE
+else
+	V2FS=FALSE
+fi
+H2FS=$V2FS
+# MaxTapTime set to 0 to disable tap to click, 70 is minimum for detection, 180 is default
+if [[ $(synclient -l | grep MaxTapTime  | awk -F' = ' '{print $2}') -lt 70 ]]; then
+	TTC=TRUE
+else
+	TTC=FALSE
+fi
+# PalmDetect - only when hardware supported
+if [[ $(synclient -l | grep PalmDetect  | awk -F' = ' '{print $2}') == "1" ]]; then
+	PALM=TRUE
+else
+	PALM=FALSE
+fi
+
+# Touchpad status:
+# 0 = Touchpad is enabled, 1 = Touchpad is switched off, 
+# 2 = Only tapping and scrolling is switched off (can do this via other settings so ignore it)
+if [[ $(synclient -l | grep TouchpadOff  | awk -F' = ' '{print $2}') == "1" ]]; then
+	TOUCH="Disabled@Enabled"
+else
+	TOUCH="Enabled@Disabled"
+fi
+
+# Get mouse speed using Xset and transform into integer so we can do a scale of 0-100
+# Xset only accepts integers or fractions nominally in the range 0-10 so divide by 10 after and look up decimals
+MSPEED=$(xset -q | grep acceleration: | awk '{print "scale=2;("$2")*10"}' | bc | rev | cut -c 4- | rev)
+# Touchpad max speed - set an arbitrary ceiling of 7
+TSPEED=$(synclient -l | grep MaxSpeed  | awk -F' = ' '{print "scale=2; ("$2"/7)*100"}' | bc | rev | cut -c 4- | rev)
+# Touchpad acceleration - how quickly it gets up to speed (has to be a floating point, so multiply by 1000 and round)
+TACCEL=$(synclient -l | grep AccelFactor | awk -F' = ' '{printf("%d\n", $2*1000)}')
+}
+
+function boolean(){
+# convert TRUE to 1 and FALSE to 0
+case $1 in
+   TRUE) echo 1 ;;
+   FALSE) echo 0 ;;
+   *) echo "Err: Unknown boolean value \"$1\"" 1>&2; exit 1 ;;
+esac
+}
+
+function getsettings(){
+#Split the settings output by pipe symbol:
+_opt=( ${settings//|/ } )
+#Align the setting with corresponding variable converting true to 1 and false to 0
+_AUTOREP="$(boolean "${_opt[0]}")"
+_REPDEL=$(( ${_opt[1]}*10 ))
+_REPRATE=${_opt[2]}
+_LHAND="$(boolean "${_opt[3]}")"
+_NATSCROLL="$(boolean "${_opt[4]}")"
+_VES="$(boolean "${_opt[5]}")"
+_V2FS="$(boolean "${_opt[6]}")"
+_TTC="$(boolean "${_opt[7]}")"
+_PALM="$(boolean "${_opt[8]}")"
+_TOUCH=${_opt[9]}
+_MSPEED=${_opt[10]}
+_TSPEED=$(echo "scale=2; (${_opt[11]}/100)*7" | bc)
+_TACCEL=$(echo ${_opt[12]} | awk '{printf($1/1000)}')
+}
+
+function savechanges(){
+# Overwrite the settings file
+echo "# Mouse, touchpad and keyboard user session settings set by cub-input" > $CONF
+
+# Keyboard settings and mouse speed are set by Xset
+if [ $_AUTOREP -eq 1 ]; then
+   xset r rate $_REPDEL $_REPRATE
+   echo "xset r rate $_REPDEL $_REPRATE" >> $CONF
+else
+   xset r off
+   echo "xset r off" >> $CONF
+fi
+# Mouse speed must be expressed as a fraction or integer
+xset m "$_MSPEED/10"
+echo "xset m $_MSPEED/10" >> $CONF
+
+# Left handed mouse and natural scrolling are both controlled by Xmodmap
+if (( $_LHAND == 0 && $_NATSCROLL == 0 )); then
+   xmodmap -e "pointer = 1 2 3 4 5 6 7 8 9 10 11 12"
+   echo 'xmodmap -e "pointer = 1 2 3 4 5 6 7 8 9 10 11 12"' >> $CONF
+elif (( $_LHAND == 0 && $_NATSCROLL == 1 )); then
+   xmodmap -e "pointer = 1 2 3 5 4 6 7 8 9 10 11 12"
+   echo 'xmodmap -e "pointer = 1 2 3 5 4 6 7 8 9 10 11 12"' >> $CONF
+elif (( $_LHAND == 1 && $_NATSCROLL == 0 )); then
+   xmodmap -e "pointer = 3 2 1 4 5 6 7 8 9 10 11 12"
+   echo 'xmodmap -e "pointer = 3 2 1 4 5 6 7 8 9 10 11 12"' >> $CONF
+elif (( $_LHAND == 1 && $_NATSCROLL == 1 )); then
+   xmodmap -e "pointer = 3 2 1 5 4 6 7 8 9 10 11 12"
+   echo 'xmodmap -e "pointer = 3 2 1 5 4 6 7 8 9 10 11 12"' >> $CONF
+fi
+
+# Touchpad state
+case $_TOUCH in
+	Enabled) _TOUCH="0" ;;
+	Disabled) _TOUCH="1" ;;
+	*) _TOUCH="0" ;;
+esac
+# Tap to click
+if [ $_TTC -eq 0 ]; then
+   _TTC=180
+else
+   _TTC=0
+fi
+# Send settings to synclient
+synclient VertEdgeScroll=$_VES HorizEdgeScroll=$_VES VertTwoFingerScroll=$_V2FS HorizTwoFingerScroll=$_V2FS TouchpadOff=$_TOUCH PalmDetect=$_PALM MaxTapTime=$_TTC MaxSpeed=$_TSPEED AccelFactor=$_TACCEL
+echo "synclient VertEdgeScroll=$_VES HorizEdgeScroll=$_VES VertTwoFingerScroll=$_V2FS HorizTwoFingerScroll=$_V2FS TouchpadOff=$_TOUCH PalmDetect=$_PALM MaxTapTime=$_TTC MaxSpeed=$_TSPEED AccelFactor=$_TACCEL" >> $CONF
+# Ensure the conf file is executable
+chmod +x $CONF
+}
+
+function restoredefaults(){
+xset r rate 500 33
+xset m 30/10 4
+xmodmap -e "pointer = 1 2 3 4 5 6 7 8 9 10 11 12"
+synclient VertEdgeScroll=1 HorizEdgeScroll=1 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 TouchpadOff=0 PalmDetect=0 MaxTapTime=180 MaxSpeed=1.75 AccelFactor=0.04
+mv -f $CONF ${CONF}.bak
+echo '# Mouse, touchpad and keyboard user session settings set by cub-input
+xset r rate 500 33
+xset m 30/10 4
+xmodmap -e "pointer = 1 2 3 4 5 6 7 8 9 10 11 12"
+synclient VertEdgeScroll=1 HorizEdgeScroll=1 VertTwoFingerScroll=1 HorizTwoFingerScroll=1 TouchpadOff=0 PalmDetect=0 MaxTapTime=180 MaxSpeed=1.75 AccelFactor=0.04
+' > $CONF
+}
+
+##########################
+### MAIN WIDGET WINDOW ###
+##########################
+function mainwindow(){
+settings=$(yad --title="Mouse, Touchpad & Keyboard Settings" --text='<span font_weight="bold">Mouse, Touchpad &amp; Keyboard Settings</span>' \
+--form --scroll --width=420 --height=465 --item-separator='@' \
+--window-icon=input-mouse --image=input-mouse --image-on-top \
+--class=cub-input --name=cub-input \
+--button="gtk-close:1" --button="Restore defaults:2" --button="gtk-apply:0" \
+--field=":LBL" \
+--field="<b>Keyboard Settings</b>:LBL" \
+--field="Auto Repeat:CHK"  \
+--field="Repeat delay (ms):SCL" \
+--field="Repeat rate (cps):SCL" \
+--field=":LBL" \
+--field="<b>Mouse &amp; Touchpad Settings</b>:LBL" \
+--field="Left handed configuration:CHK" \
+--field="Enable natural scrolling:CHK" \
+--field="Enable edge scrolling:CHK" \
+--field="Enable two finger scrolling:CHK" \
+--field="Disable tap to click:CHK" \
+--field="Enable palm detection:CHK" \
+--field="Touchpad status:CB" \
+--field=":LBL" \
+--field="<b>Mouse &amp; Touchpad Speed</b>:LBL" \
+--field="Mouse pointer speed:SCL" \
+--field="Touchpad speed:SCL" \
+--field="Touchpad acceleration:SCL" \
+"" "" "$AUTOREP" "$REPDEL" "$REPRATE" \
+"" "" "$LHAND" "$NATSCROLL" "$VES" "$V2FS" "$TTC" "$PALM" "$TOUCH" \
+"" "" "$MSPEED" "$TSPEED" "$TACCEL")
+
+response=$?
+
+# If cancelled then don't do anything, just quit now!
+# Cancel = 1  Close window icon = 252
+# Once applied keep dialog open?
+
+case $response in
+	0) getsettings && savechanges && getcurrent && mainwindow;;
+	1) exit 0 ;;
+	2) restoredefaults && getcurrent && mainwindow;;
+	252) exit 0 ;;
+	*) exit 1;;
+esac
+}
+getcurrent
+mainwindow
+
+#####################
+### UNUSED PARAMS ###
+###############################################################
+### TapButton1 1 or 3 -- switch primary buttons USE XMODMAP #######
+### TapButton3 3 or 1 -- switch primary buttons USE XMODMAP ############
+### TAP1=$(synclient -l | grep TapButton1  | awk -F' = ' '{print $2}') #
+### TAP3=$(synclient -l | grep TapButton3  | awk -F' = ' '{print $2}') #
+### MINSP=$(synclient -l | grep MinSpeed  | awk -F' = ' '{print $2}')  #
+########################################################################
