@@ -1,0 +1,15 @@
+Package: chromecast-daily-wallpaper
+Version: 0.1cub1
+Architecture: all
+Maintainer: Rich Jack <contact@cublinux.com>
+Installed-Size: 31
+Depends: lynx, nitrogen
+Section: utils
+Priority: optional
+Homepage: https://github.com/CubLinux
+Description: Chromecast Daily Wallpaper
+ Simple command line tool which will grab a random wallpaper
+ from the Chromecast backgrounds repository at
+ https://github.com/dconnolly/chromecast-backgrounds.
+ .
+ Just add chromecast-daily-wallpaper to your autostart script.

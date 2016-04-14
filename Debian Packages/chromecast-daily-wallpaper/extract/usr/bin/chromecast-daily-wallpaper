@@ -1,0 +1,45 @@
+#!/bin/bash
+# Chromecast-daily-wallpaper
+# Version 0.1cub1
+# 
+# Simple command line tool which will grab a random wallpaper
+# from the Chromecast backgrounds repository at
+# https://github.com/dconnolly/chromecast-backgrounds
+#
+# Depends: lynx, nitrogen
+# 
+# Created by RichJack, 2015 designed for Cub Linux:
+# https://cublinux.com
+# https://github.com/CubLinux
+# 
+# Licence: GPL v3
+#
+# Chromecast-daily-wallpaper is free software: you can redistribute it
+# and/or modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 2 of
+# the License, or (at your option) any later version.
+#
+# Chromecast-daily-wallpaper is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+# of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Chromecast-daily-wallpaper.  If not, see
+# <http://www.gnu.org/licenses/>.
+
+tempfile=/tmp/dailywallpaper.txt
+
+lynx -dump https://github.com/dconnolly/chromecast-backgrounds | awk '/githubusercontent/{print $2}' > $tempfile
+
+TOTAL=$(wc -l < $tempfile)
+
+# Got this from http://crunchbang.org/forums/viewtopic.php?id=11374
+RandomNumber=$(( $RANDOM % $TOTAL ))
+test ! $RandomNumber = 0 || RandomNumber=1
+
+DAILY=$(sed -n "${RandomNumber}p" $tempfile)
+
+wget -O /tmp/dailywallpaper.jpg $DAILY
+
+nitrogen --set-scaled --save /tmp/dailywallpaper.jpg

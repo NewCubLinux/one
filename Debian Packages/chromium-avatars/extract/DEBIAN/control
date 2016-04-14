@@ -1,0 +1,12 @@
+Package: chromium-avatars
+Version: 0.1cub1
+Architecture: all
+Depends: mugshot
+Maintainer: Rich Jack <contact@cublinux.com>
+Installed-Size: 1900
+Section: utils
+Priority: optional
+Homepage: https://chromium.googlesource.com/chromium/src.git/+/master/ui/webui/resources/images/
+Description: Avatars from Chromium OS
+ Provides avatars that can be used with Mugshot and
+ displayed on the lightdm greeter.
