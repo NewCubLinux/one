@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "ค้นหาโดย Google",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "วิธีท่องเว็บที่เร็วที่สุด",
+    "description": "The description of the application, displayed in the web store."
+  }
+}

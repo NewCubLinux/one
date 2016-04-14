@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Google 検索",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "ウェブを検索する最も速い手段です。",
+    "description": "The description of the application, displayed in the web store."
+  }
+}

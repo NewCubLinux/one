@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Google-haku",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "Nopein tapa hakea verkosta.",
+    "description": "The description of the application, displayed in the web store."
+  }
+}

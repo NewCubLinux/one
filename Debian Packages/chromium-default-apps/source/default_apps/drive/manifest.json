@@ -1,0 +1,30 @@
+{
+"update_url":"http://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description":"__MSG_appDesc__",
+  "default_locale": "en_US",
+  "version": "6.2",
+  "icons": {"128": "128.png" },
+  "offline_enabled": true,
+  "manifest_version": 2,
+  "permissions": [
+    "background",
+    "clipboardRead",
+    "clipboardWrite",
+    "notifications",
+    "unlimitedStorage"
+  ],
+  "options_page": "https://drive.google.com/settings",
+  "background": { "allow_js_access": false },
+  "app": {
+    "launch": {
+      "web_url": "https://drive.google.com/"
+    },
+    "urls": [
+      "http://docs.google.com/",
+      "http://drive.google.com/",
+      "https://docs.google.com/",
+      "https://drive.google.com/"
+    ]
+  }
+}

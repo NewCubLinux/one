@@ -1,0 +1,19 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "0.0.0.19",
+  "icons": { "16": "16.png", "32": "32.png", "48": "48.png", "128": "128.png" },
+  "app": {
+    "urls": [
+      "*://www.google.com/search",
+      "*://www.google.com/webhp",
+      "*://www.google.com/imgres"
+    ],
+    "launch": {
+      "web_url": "http://www.google.com/webhp?source=search_app"
+    }
+  },
+  "permissions": []
+}

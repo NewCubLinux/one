@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "YouTube",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "Ang pinakasikat na online na komunidad ng video sa mundo.", 
+    "description":"App description."
+  }
+}

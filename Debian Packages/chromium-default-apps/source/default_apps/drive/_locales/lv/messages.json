@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "Google disks",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "Google disks: veidojiet, koplietojiet un glabājiet visu saturu vienuviet.",
+    "description":"App description."
+  }
+}

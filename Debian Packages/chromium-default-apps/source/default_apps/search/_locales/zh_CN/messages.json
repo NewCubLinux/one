@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Google 搜尋",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "搜索网页的最快方法。",
+    "description": "The description of the application, displayed in the web store."
+  }
+}

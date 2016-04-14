@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Sign in to Chromium
+Exec=/usr/bin/chromium-browser --app-id=ennkphjdgehloodpbhlhldgbnhmacadg
+Icon=application-x-executable
+StartupWMClass=crx_ennkphjdgehloodpbhlhldgbnhmacadg
+Categories=Network;WebBrowser

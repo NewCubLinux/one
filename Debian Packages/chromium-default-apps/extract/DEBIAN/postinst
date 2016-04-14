@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+# Move updated Chromium launcher
+mkdir -p /usr/local/share/applications &>/dev/null
+mv -f /usr/lib/chromium-browser/chromium-browser.desktop /usr/local/share/applications/chromium-browser.desktop &>/dev/null
+
+# Update icon cache
+/usr/bin/gtk-update-icon-cache -f /usr/share/icons/hicolor &>/dev/null

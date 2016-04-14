@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Google pretraživanje",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "Najbrži način pretraživanja weba.",
+    "description": "The description of the application, displayed in the web store."
+  }
+}

@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "Disc Google",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "Disc Google: creaţi, permiteţi accesul şi păstraţi-vă toate documentele într-un singur loc.",
+    "description":"App description."
+  }
+}

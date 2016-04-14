@@ -1,0 +1,20 @@
+Package: chromium-default-apps
+Version: 0.6cub1
+Architecture: all
+Depends: dpkg (>=1.17)
+Maintainer: Rich Jack <contact@cublinux.com>
+Installed-Size: 472
+Section: net
+Priority: optional
+Homepage: https://github.com/CubLinux
+Description: Default Chromium Apps for Cub Linux
+ Provides the following apps as either launchers or
+ packed extensions:
+  * Cub Linux Blue Chrome theme
+  * Gmail
+  * Drive
+  * YouTube
+  * Google Docs, Sheets and Slides
+  * Search
+  * Chrome Media Player
+  * Chromium OS icons

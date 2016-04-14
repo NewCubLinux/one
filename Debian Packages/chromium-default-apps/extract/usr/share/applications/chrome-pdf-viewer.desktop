@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Chrome PDF Viewer
+NoDisplay=true
+Exec=/usr/bin/chromium-browser file://%f
+Icon=application-pdf
+Categories=GNOME;Utility;

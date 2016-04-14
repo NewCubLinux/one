@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "Google डिस्क",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "Google डिस्क: बनाएं, साझा करें और अपनी सारी सामग्री एक जगह रखें", 
+    "description":"App description."
+  }
+}

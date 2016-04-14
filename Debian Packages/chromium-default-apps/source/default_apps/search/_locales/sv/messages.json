@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Sök på Google",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "Den snabbaste sökningen på webben",
+    "description": "The description of the application, displayed in the web store."
+  }
+}

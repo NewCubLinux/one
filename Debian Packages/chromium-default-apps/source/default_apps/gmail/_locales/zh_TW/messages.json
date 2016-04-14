@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "Gmail",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "垃圾郵件更少、迅速，並且可供搜尋的電子郵件服務。", 
+    "description":"App description."
+  }
+}

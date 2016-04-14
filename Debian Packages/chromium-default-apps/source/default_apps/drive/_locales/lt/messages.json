@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "„Google“ diskas ",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "„Google“ diskas: kurkite, bendrinkite ir saugokite visą savo medžiagą vienoje vietoje.",
+    "description":"App description."
+  }
+}

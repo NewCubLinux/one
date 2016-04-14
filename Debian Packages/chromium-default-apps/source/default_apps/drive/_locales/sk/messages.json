@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "Disk Google",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "Disk Google – vytvárajte, zdieľajte a ukladajte všetky svoje súbory na jednom mieste.",
+    "description":"App description."
+  }
+}

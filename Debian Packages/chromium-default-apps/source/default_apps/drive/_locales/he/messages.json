@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "כונן Google",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "כונן Google: צור, שתף ושמור את כל הדברים שלך במקום אחד.",
+    "description":"App description."
+  }
+}

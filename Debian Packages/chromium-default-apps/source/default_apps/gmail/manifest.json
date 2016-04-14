@@ -1,0 +1,21 @@
+{
+"update_url":"http://clients2.google.com/service/update2/crx",
+"name": "__MSG_appName__",
+ "description":"__MSG_appDesc__", 
+  "default_locale": "en",
+ "version": "7",
+  "permissions": [
+    "notifications"
+  ],
+  "icons": { "128": "128.png" },
+  "options_page": "https://mail.google.com/mail/ca/#settings",
+  "app": {
+    "launch": {
+      "container": "tab",
+      "web_url": "https://mail.google.com/mail/ca"
+    },
+    "urls": [
+      "*://mail.google.com/mail/ca"
+    ]
+  }
+}

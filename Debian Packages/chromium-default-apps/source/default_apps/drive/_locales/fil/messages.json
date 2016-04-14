@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "Google Drive",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "Google Drive: lumikha, magbahagi at itago lahat ng gamit mo sa isang lugar. ",
+    "description":"App description."
+  }
+}

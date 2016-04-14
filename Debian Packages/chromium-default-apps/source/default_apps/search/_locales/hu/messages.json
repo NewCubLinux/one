@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Google-keresés",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "Az internetes keresés leggyorsabb módja.",
+    "description": "The description of the application, displayed in the web store."
+  }
+}

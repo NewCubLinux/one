@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Ricerca Google",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "Il modo più veloce di cercare sul Web.",
+    "description": "The description of the application, displayed in the web store."
+  }
+}

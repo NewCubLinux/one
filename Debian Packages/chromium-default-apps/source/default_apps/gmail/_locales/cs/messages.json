@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "Gmail",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "Rychlý e-mail s možností vyhledávání a menším množstvím spamu.", 
+    "description":"App description."
+  }
+}

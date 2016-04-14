@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Hľadať v Google",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "Najrýchlejšie hľadanie na webe.",
+    "description": "The description of the application, displayed in the web store."
+  }
+}

@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "Google ไดรฟ์",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "Google ไดรฟ์: สร้าง แบ่งปัน และเก็บข้อมูลทั้งหมดไว้ในที่เดียว ",
+    "description":"App description."
+  }
+}

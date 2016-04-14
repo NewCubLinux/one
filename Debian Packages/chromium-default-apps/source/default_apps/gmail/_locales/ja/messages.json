@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "Gmail",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "高速で検索機能に優れた、迷惑メールの少ないメール システムです。", 
+    "description":"App description."
+  }
+}

@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "YouTube",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "'s Werelds populairste online video community.", 
+    "description":"App description."
+  }
+}

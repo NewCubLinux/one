@@ -1,0 +1,11 @@
+﻿{
+  "appName": {
+    "message": "Gmail",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "
+Mabilis, nahahanap na email na may mas kaunting spam.", 
+    "description":"App description."
+  }
+}

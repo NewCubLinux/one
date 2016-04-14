@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "Google Drive",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "Google Drive: crea, condividi e conserva tutti i tuoi file in unico posto.",
+    "description":"App description."
+  }
+}

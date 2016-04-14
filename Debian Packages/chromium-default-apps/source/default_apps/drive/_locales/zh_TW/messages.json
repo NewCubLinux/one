@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "Google 雲端硬碟",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "Google 雲端硬碟：檔案製作、分享、存放，全部集中一處。",
+    "description":"App description."
+  }
+}

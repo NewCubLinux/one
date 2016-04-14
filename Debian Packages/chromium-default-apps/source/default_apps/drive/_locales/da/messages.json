@@ -1,0 +1,10 @@
+﻿{
+  "appName": {
+    "message": "Google Drev",
+    "description": "App name."
+  },
+  "appDesc": {
+    "message": "Google Drev: Opret, del, og gem alle dine ting på ét sted.",
+    "description":"App description."
+  }
+}
