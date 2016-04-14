@@ -1,0 +1,12 @@
+Package: chromiumos-cursor-theme
+Version: 0.1cub1
+Architecture: all
+Maintainer: Rich Jack <contact@cublinux.com>
+Installed-Size: 48
+Section: Miscellaneous - Graphical
+Priority: optional
+Homepage: https://www.chromium.org/chromium-os
+Description: Chromium OS Mouse Cursor Theme
+ This is the a port of the Chromium OS mouse cursor 
+ theme to Cub Linux.
+ .
