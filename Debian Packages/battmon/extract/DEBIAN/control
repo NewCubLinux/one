@@ -1,0 +1,27 @@
+Package: battmon
+Version: 0.9.8cub2
+Architecture: all
+Depends: acpi, pm-utils, yad, libnotify-bin, xfce4-power-manager, lxrandr, light-locker-settings, light
+Maintainer: Rich Jack <contact@cublinux.com>
+Installed-Size: 148
+Section: utils
+Priority: optional
+Homepage: https://github.com/CubLinux
+Description: Battmon - acpi battery monitor applet
+ designed for Cub Linux
+ .
+ Simple battery monitoring applet for any panel with a 
+ notification area or system tray eg lxpanel, tint2 etc.
+ Unlike the built in battery applets, this notifies the
+ user on low and critical battery level and can 
+ optionally hibernate the computer. It also offers a
+ right-click menu with access to a simple screen brightness 
+ tool, lxrandr for screen resolution, light-locker-settings
+ for screen lock and a link to open xfce4-power-manager. 
+ This applet will optionally beep on critical battery level.
+ .
+ Icons come from system theme or you can use Battmon's own
+ icon set.
+ .
+ Just add battmon & to your openbox autostart.sh file and 
+ it will sit in the system tray.

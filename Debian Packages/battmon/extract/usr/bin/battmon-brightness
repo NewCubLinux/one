@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# script to change brightness using light and yad
+
+LC_NUMERIC=C
+
+CURR=$(light -G)
+PCT=${CURR%.*}
+
+NEW=$(yad --scale --hide-value --value=$PCT --min-value=5 --max-value=100 \
+	--title="Display brightness" --on-top --mouse --skip-taskbar --window-icon=display \
+	--image=system-brightness --width=300 --text="   Set the brightness of your display:")
+
+light -S $NEW
+
+exit 0

@@ -1,0 +1,3 @@
+#!/bin/bash -e
+chmod a+s `which battmon`
+chmod a+s `which battmon-brightness`
