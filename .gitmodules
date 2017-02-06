@@ -1,0 +1,3 @@
+[submodule "chromecast-daily-wallpaper"]
+	path = chromecast-daily-wallpaper
+	url = https://github.com/NewCubLinux/chromecast-daily-wallpaper
